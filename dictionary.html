@@ -4,227 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bye Bye Oil - Dictionary</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffff;
-            overflow: hidden;
-        }
-
-        .page {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .left-pane {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .topbar {
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #bbb;
-            padding: 0 18px;
-            color: #444;
-            font-size: 18px;
-        }
-
-        .top-left, .top-center, .top-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .perf-link {
-            text-decoration: none;
-            color: #444;
-            border-bottom: 1px solid #bbb;
-            padding-bottom: 2px;
-        }
-
-        .top-center {
-            flex: 1;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: 600;
-            color: #555;
-        }
-
-        .top-left {
-            width: 200px;
-            justify-content: flex-start;
-            padding-left: 6px;
-        }
-
-        .top-right {
-            width: 200px;
-            justify-content: flex-end;
-            color: #666;
-        }
-
-        .main-content {
-            flex: 1;
-            display: flex;
-            align-items: stretch;
-            position: relative;
-            min-height: 0;
-            overflow: hidden;
-        }
-
-        .artwork-area {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 20px;
-            min-width: 0;
-            overflow: hidden;
-        }
-
-        .artwork-box {
-            width: 420px;
-            height: 220px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #ffffff;
-            border-radius: 2px;
-        }
-
-        #dictCanvas {
-            display: block;
-        }
-
-        .catalog {
-            width: 280px;
-            height: 100vh;
-            border-left: 1px solid #bbb;
-            overflow-y: auto;
-            background: #fff;
-            flex-shrink: 0;
-        }
-
-        .catalog-header {
-            padding: 14px 18px;
-            font-weight: 600;
-            color: #555;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            background: #fff;
-        }
-
-        .catalog-item {
-            padding: 10px 18px;
-            border-bottom: 1px solid #f3f3f3;
-            cursor: pointer;
-            color: #444;
-            font-size: 15px;
-        }
-
-        .catalog-item:hover {
-            background: #fafafa;
-        }
-
-        .catalog-item.selected {
-            background: #f0f0f0;
-            font-weight: 600;
-        }
-
-        .info-bottom {
-            height: 25vh;
-            padding: 0;
-            border-top: 1px solid #bbb;
-            display: flex;
-            align-items: stretch;
-        }
-
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 16px;
-            color: #444;
-        }
-
-        .info-table tbody td {
-            padding: 18px;
-            border-right: 1px solid #ddd;
-            vertical-align: top;
-            color: #444;
-        }
-
-        .info-table tbody tr.info-row-1 td {
-            font-weight: 600;
-        }
-
-        .info-table tbody tr.info-row-2 td {
-            border-top: 1px solid #ddd;
-            font-weight: 400;
-        }
-
-        .info-table td:last-child {
-            border-right: none;
-        }
-
-        @media (max-width: 768px) {
-            .topbar { height: 56px; }
-            .top-center { font-size: 18px; }
-            .artwork-box { width: 300px; height: 180px; }
-            .info-table tbody td { padding: 10px; font-size: 14px; }
-            .catalog { width: 200px; }
-            .catalog-item { padding: 8px 12px; font-size: 13px; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="page">
-        <div class="left-pane">
-            <header class="topbar">
-                <div class="top-left"><a class="perf-link" href="index.html">&larr; Performance</a></div>
-                <div class="top-center">Dictionary</div>
-                <div class="top-right"></div>
+    <div class="dict-page">
+        <div class="dict-left-pane">
+            <header class="dict-topbar">
+                <div class="dict-top-left"><a class="dict-perf-link" href="index.html">&larr; Performance</a></div>
+                <div class="dict-top-center">Dictionary</div>
+                <div class="dict-top-right"></div>
             </header>
 
-            <div class="main-content">
-                <div class="artwork-area">
-                    <div class="artwork-box">
+            <!-- obj -->
+
+            <div class="dict-main-content">
+                <div class="dict-artwork-area">
+                    <div class="dict-artwork-box">
                         <canvas id="dictCanvas"></canvas>
                     </div>
                 </div>
             </div>
 
-            <div class="info-bottom">
-                <table class="info-table">
+            <!-- info bottom -->
+            <div class="dict-info-bottom">
+                <table class="dict-info-table">
                     <tbody>
-                        <tr class="info-row-1">
-                            <td class="name-cell">-</td>
-                            <td class="price-cell">-</td>
-                            <td class="usage-cell">-</td>
-                        </tr>
-                        <tr class="info-row-2">
-                            <td class="material-cell">Material - related to petroleum</td>
-                            <td class="replacement-cell">Replacement object</td>
-                            <td class="empty-cell"></td>
-                        </tr>
+                        <tr class="dict-info-row-1">
+                        <td class="dict-name-cell">
+                            <div class="dict-label">Name:</div>
+                            <div class="dict-value dict-name-value">-</div>
+                        </td>
+                        <td class="dict-price-cell">
+                            <div class="dict-label">Petroleum Material:</div>
+                            <div class="dict-value dict-material-value">-</div>
+                        </td>
+                        <td class="dict-usage-cell">
+                            <div class="dict-label">Usage:</div>
+                            <div class="dict-value dict-usage-value">-</div>
+                        </td>
+                    </tr>
+                    <tr class="dict-info-row-2">
+                        <td class="dict-material-cell">
+                            <div class="dict-label">Price:</div>
+                            <div class="dict-value dict-price-value">-</div>
+                        </td>
+                        <td class="dict-replacement-cell">
+                            <div class="dict-label">Possible Replacement:</div>
+                            <div class="dict-value dict-replacement-value">Replacement object</div>
+                        </td>
+                        <td class="dict-empty-cell"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <aside class="catalog" id="catalog" aria-label="Object dictionary">
-            <div class="catalog-header">Dictionary</div>
+        <aside class="dict-catalog" id="catalog" aria-label="Object dictionary">
+            <div class="dict-catalog-header">Dictionary</div>
         </aside>
     </div>
 
@@ -244,7 +80,7 @@
 
             const viewer = new ModelViewer(
                 document.getElementById('dictCanvas'),
-                document.querySelector('.artwork-area')
+                document.querySelector('.dict-artwork-area')
             );
 
             function findDetails(name) {
@@ -252,7 +88,7 @@
             }
 
             function selectItem(name, el) {
-                document.querySelectorAll('.catalog-item').forEach(x => x.classList.remove('selected'));
+                document.querySelectorAll('.dict-catalog-item').forEach(x => x.classList.remove('selected'));
                 if (el) el.classList.add('selected');
 
                 const d = findDetails(name) || {};
@@ -261,11 +97,17 @@
                 const material = d.petroleum || 'Material - related to petroleum';
                 const replacement = d.alternative || 'Replacement object';
 
-                document.querySelector('.info-table .name-cell').textContent = name;
-                document.querySelector('.info-table .price-cell').textContent = price;
-                document.querySelector('.info-table .usage-cell').textContent = usage;
-                document.querySelector('.info-table .material-cell').textContent = material;
-                document.querySelector('.info-table .replacement-cell').textContent = replacement;
+                const nameEl = document.querySelector('.dict-name-value');
+                const priceEl = document.querySelector('.dict-price-value');
+                const usageEl = document.querySelector('.dict-usage-value');
+                const materialEl = document.querySelector('.dict-material-value');
+                const replacementEl = document.querySelector('.dict-replacement-value');
+
+                if (nameEl) nameEl.textContent = name;
+                if (priceEl) priceEl.textContent = price;
+                if (usageEl) usageEl.textContent = usage;
+                if (materialEl) materialEl.textContent = material;
+                if (replacementEl) replacementEl.textContent = replacement;
 
                 viewer.loadProduct(name);
             }
@@ -274,13 +116,13 @@
             const sorted = list.slice().sort((a, b) => a.localeCompare(b));
             sorted.forEach(name => {
                 const el = document.createElement('div');
-                el.className = 'catalog-item';
+                el.className = 'dict-catalog-item';
                 el.textContent = name;
                 el.addEventListener('click', () => selectItem(name, el));
                 catalog.appendChild(el);
             });
 
-            const first = catalog.querySelector('.catalog-item');
+            const first = catalog.querySelector('.dict-catalog-item');
             if (first) selectItem(first.textContent, first);
         });
     </script>

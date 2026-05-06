@@ -68,7 +68,7 @@ class ModelViewer {
         const distance = Math.abs(this.camera.position.z);
         const fovRad = (this.camera.fov * Math.PI) / 180;
         const fullHeight = 2 * Math.tan(fovRad / 2) * distance;
-        const desiredHeight = fullHeight * 0.45;
+        const desiredHeight = fullHeight * 0.4;
 
         const maxDim = Math.max(size.x, size.y, size.z, 1e-6);
         const scale = desiredHeight / maxDim;
