@@ -271,6 +271,12 @@ const PRODUCT_DETAILS = {
         alternative: "Mineral sunscreen in metal tin",
         usage: "Personal Care"
     },
+      "Student card": {
+        price: 5.00,
+        petroleum: "Plastic card body, synthetic inks",
+        alternative: "Digital ID and Code-based access",
+        usage: "Institutional"
+    },
     "Perfume": {
         price: 79.99,
         petroleum: "Plastic bottle, synthetic fragrance compounds",
