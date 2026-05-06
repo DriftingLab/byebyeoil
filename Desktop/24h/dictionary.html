@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dictionary</title>
+</head>
+<body>
+  <header class="topbar"><a class="back-link" href="index.html">Performance</a></header>
+  <div class="container">
+    <div class="content" id="content">
+      <div class="artwork-area">
+        <div class="artwork-box">
+          <canvas id="dictCanvas" width="320" height="160"></canvas>
+        </div>
+      </div>
+
+      <div class="info-bottom">
+        <table class="info-table">
+          <tbody>
+            <tr class="info-row-1">
+              <td class="name-cell">NAME</td>
+              <td class="price-cell">PRICE</td>
+              <td class="usage-cell">USAGE</td>
+            </tr>
+            <tr class="info-row-2">
+              <td class="material-cell">Material - related to petroleum</td>
+              <td class="replacement-cell">Replacement object</td>
+              <td class="empty-cell"></td>
+            </tr>
+          </body>
+          </html>
+      const details = (window.PRODUCT_DETAILS && window.PRODUCT_DETAILS[name]) || null;
+      const material = details ? details.petroleum : '';
+      const alt = details ? details.alternative : '';
+      const price = details && details.price ? `$${details.price.toFixed(2)}` : '';
+
+      document.querySelector('.info-table .name-cell').textContent = name;
+      document.querySelector('.info-table .price-cell').textContent = price;
+      document.querySelector('.info-table .usage-cell').textContent = material;
+      document.querySelector('.info-table .material-cell').textContent = material;
+      document.querySelector('.info-table .replacement-cell').textContent = alt;
+
+      // If you have model image or OBJ models, you can render here. For now we draw a placeholder image if available.
+      const canvas = document.getElementById('dictCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // try to load an image named models/{slug}.png
+      const img = new Image();
+      img.onload = ()=>{
+        // center image
+        const sx = (canvas.width - img.width)/2;
+        const sy = (canvas.height - img.height)/2;
+        ctx.drawImage(img, sx, sy);
+      };
+      img.onerror = ()=>{
+        // draw simple icon
+        ctx.fillStyle = '#f5f5f5';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = '#cfcfcf';
+        ctx.fillRect(canvas.width/2-30, canvas.height/2-20, 60,40);
+      };
+      img.src = `models/${slugify(name)}.png`;
+    }
+
+    function setupList(){
+      const container = document.getElementById('list');
+      PETROLUM_LIST.forEach((name, i)=>{
+        <!doctype html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <title>Dictionary</title>
+          <style>
+            *{box-sizing:border-box;margin:0;padding:0}
+            body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;background:#fff;color:#222}
+            .topbar{height:64px;display:flex;align-items:center;border-bottom:1px solid #e6e6e6;padding:0 18px}
+            .back-link{color:#222;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+            .container{display:flex;height:calc(100vh - 64px)}
+            .list{width:320px;border-left:1px solid #eaeaea;overflow:auto;padding:8px}
+            .list .item{padding:12px 14px;border-bottom:1px solid #f3f3f3;cursor:pointer}
+            .list .item:hover{background:#fafafa}
+            .list .item.selected{background:#f2f2f2}
+            .content{flex:1;padding:20px;display:flex;flex-direction:column;gap:18px}
+            .artwork-box{width:320px;height:160px;border:1px solid #f0f0f0;background:#fff}
+            .info-table{width:100%;border-collapse:collapse;margin-top:6px}
+            .info-table td{padding:8px;border:1px solid #f0f0f0}
+            .info-row-1 td{font-weight:600}
+          </style>
+        </head>
+        <body>
+          <header class="topbar"><a class="back-link" href="index.html">&larr; Performance</a></header>
+          <div class="container">
+            <div class="content" id="content">
+              <div class="artwork-area">
+                <div class="artwork-box">
+                  <canvas id="dictCanvas" width="320" height="160"></canvas>
+                </div>
+              </div>
+
+              <div class="info-bottom">
+                <table class="info-table">
+                  <tbody>
+                    <tr class="info-row-1">
+                      <td class="name-cell">NAME</td>
+                      <td class="price-cell">PRICE</td>
+                      <td class="usage-cell">USAGE</td>
+                    </tr>
+                    <tr class="info-row-2">
+                      <td class="material-cell">Material - related to petroleum</td>
+                      <td class="replacement-cell">Replacement object</td>
+                      <td class="empty-cell"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <aside class="list" id="list" aria-label="Petroleum list"></aside>
+          </div>
+
+          <script src="petrolum_list.js"></script>
+          <script src="products.js"></script>
+          <script>
+            function slugify(name){ return name.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,''); }
+
+            function renderDetails(name){
+              const details = (window.PRODUCT_DETAILS && window.PRODUCT_DETAILS[name]) || {};
+              const material = details.petroleum || '';
+              const alt = details.alternative || '';
+              const price = (typeof details.price === 'number') ? `$${details.price.toFixed(2)}` : '';
+
+              document.querySelector('.info-table .name-cell').textContent = name;
+              document.querySelector('.info-table .price-cell').textContent = price;
+              document.querySelector('.info-table .usage-cell').textContent = material;
+              document.querySelector('.info-table .material-cell').textContent = material;
+              document.querySelector('.info-table .replacement-cell').textContent = alt;
+
+              const canvas = document.getElementById('dictCanvas');
+              const ctx = canvas.getContext('2d');
+              ctx.clearRect(0,0,canvas.width,canvas.height);
+              const img = new Image();
+              img.onload = ()=>{
+                const sx = (canvas.width - img.width)/2;
+                const sy = (canvas.height - img.height)/2;
+                ctx.drawImage(img, sx, sy);
+              };
+              img.onerror = ()=>{
+                ctx.fillStyle = '#fbfbfb';
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = '#ddd';
+                ctx.fillRect(canvas.width/2-36, canvas.height/2-22, 72,44);
+              };
+              img.src = `models/${slugify(name)}.png`;
+            }
+
+            function setupList(){
+              const container = document.getElementById('list');
+              PETROLUM_LIST.forEach((name)=>{
+                const el = document.createElement('div');
+                el.className = 'item';
+                el.textContent = name;
+                el.addEventListener('click', ()=>{
+                  container.querySelectorAll('.item').forEach(x=>x.classList.remove('selected'));
+                  el.classList.add('selected');
+                  renderDetails(name);
+                });
+                container.appendChild(el);
+              });
+
+              // select Adhesive by default if present
+              const adhesive = Array.from(container.querySelectorAll('.item')).find(x=>x.textContent==='Adhesive');
+              (adhesive || container.querySelector('.item') || {click:()=>{}}).click();
+            }
+
+            window.addEventListener('DOMContentLoaded', setupList);
+          </script>
+        </body>
+        </html>

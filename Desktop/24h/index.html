@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bye Bye Oil - 24h Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top bar */
+        .topbar {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #bbb;
+            padding: 0 18px;
+            color: #444;
+            font-size: 18px;
+        }
+
+        .top-left, .top-center, .top-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .dict-link {
+            text-decoration: none;
+            color: #444;
+            border-bottom: 1px solid #bbb;
+            padding-bottom: 2px;
+        }
+
+        .top-center {
+            flex: 1;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .top-left {
+            width: 200px;
+            justify-content: flex-start;
+            padding-left: 6px;
+        }
+
+        .top-right {
+            width: 200px;
+            justify-content: flex-end;
+            gap: 8px;
+            color: #666;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #e05b5b;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .live-text {
+            margin-left: 6px;
+            color: #444; /* keep text neutral */
+        }
+        /* blinking animation for live dot */
+        @keyframes liveBlink {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.15; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .live-dot {
+            animation: liveBlink 1s linear infinite;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: stretch;
+            position: relative;
+        }
+
+        .artwork-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .artwork-box {
+            width: 420px;
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+
+        #canvas {
+            width: 320px;
+            height: 160px;
+            display: block;
+        }
+
+        /* right-list removed from performance page */
+
+        /* product-name removed for this layout (use table and centered artwork) */
+
+        .info-bottom {
+            height: 25vh;
+            padding: 0;
+            border-top: 1px solid #bbb;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            color: #444;
+        }
+
+        .info-table thead th {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #bbb;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .info-table tbody td {
+            padding: 18px;
+            border-right: 1px solid #ddd;
+            vertical-align: top;
+            color: #444;
+        }
+
+        .info-table tbody tr.info-row-2 td {
+            border-top: 1px solid #ddd;
+        }
+
+        .info-table td:last-child {
+            border-right: none;
+        }
+
+        @media (max-width: 768px) {
+            .topbar { height: 56px; }
+            .top-center { font-size: 18px; }
+            .artwork-box { width: 300px; height: 180px; }
+            #canvas { width: 260px; height: 140px; }
+            .info-table thead th { padding: 10px; font-size: 14px; }
+            .info-table tbody td { padding: 10px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="topbar">
+            <div class="top-left"><a class="dict-link" href="dictionary.html">Dictionary</a></div>
+            <div class="top-center" id="timeDisplay">00:00</div>
+            <div class="top-right"><span class="live-dot"></span><span class="live-text">LIVE</span></div>
+        </header>
+
+        <div class="main-content">
+            <div class="artwork-area">
+                <div class="artwork-box">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-bottom">
+            <table class="info-table">
+                <tbody id="infoTable">
+                    <tr class="info-row-1">
+                        <td class="name-cell">-</td>
+                        <td class="price-cell">-</td>
+                        <td class="usage-cell">-</td>
+                    </tr>
+                    <tr class="info-row-2">
+                        <td class="material-cell">Material - related to petroleum</td>
+                        <td class="replacement-cell">Replacement object</td>
+                        <td class="empty-cell"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

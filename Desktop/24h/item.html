@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Item</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;background:#fff;color:#444}
+    .topbar{height:64px;display:flex;align-items:center;border-bottom:1px solid #bbb;padding:0 18px}
+    .back-link{color:#444;text-decoration:none;border-bottom:1px solid #bbb;padding-bottom:2px}
+    .wrap{padding:18px}
+    .title{font-size:28px;margin-bottom:12px}
+    .meta{margin-top:8px;color:#666}
+  </style>
+  <script src="products.js"></script>
+  <script>
+    function q(name){
+      return decodeURIComponent((new URLSearchParams(location.search)).get(name)||'');
+    }
+    function onLoad(){
+      const name = q('name');
+      document.getElementById('title').textContent = name || 'Unknown';
+
+      // find details in PRODUCT_DETAILS if available
+      const details = (window.PRODUCT_DETAILS && window.PRODUCT_DETAILS[name]) || null;
+      const material = details ? details.petroleum : '—';
+      const alt = details ? details.alternative : '—';
+      const price = details && details.price ? `$${details.price.toFixed(2)}` : '—';
+
+      document.getElementById('material').textContent = material;
+      document.getElementById('alternative').textContent = alt;
+      document.getElementById('price').textContent = price;
+    }
+    window.addEventListener('DOMContentLoaded', onLoad);
+  </script>
+</head>
+<body>
+  <header class="topbar"><a class="back-link" href="dictionary.html">&larr; Dictionary</a></header>
+  <div class="wrap">
+    <div id="title" class="title">Item</div>
+    <div><strong>Price:</strong> <span id="price">-</span></div>
+    <div style="margin-top:8px"><strong>Material - related to petroleum:</strong></div>
+    <div id="material" class="meta">-</div>
+    <div style="margin-top:8px"><strong>Replacement object:</strong></div>
+    <div id="alternative" class="meta">-</div>
+  </div>
+</body>
+</html>
