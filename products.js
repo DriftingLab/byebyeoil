@@ -31,7 +31,7 @@ const PRODUCTS_SCHEDULE = [
     { time: "09:46", product: "asphalt road" },
     { time: "09:50", product: "traffic light" },
     { time: "10:15", product: "elevator button" },
-    { time: "10:16", product: "10:16am elevator" },
+    { time: "10:16", product: "elevator" },
     { time: "10:20", product: "student card" },
     { time: "10:25", product: "Laptop" },
     { time: "10:26", product: "keyboard" },
@@ -40,7 +40,7 @@ const PRODUCTS_SCHEDULE = [
     { time: "10:31", product: "drink bottle" },
     { time: "10:32", product: "chair cushion" },
     { time: "10:50", product: "elevator button" },
-    { time: "10:51", product: "10:51am elevator" },
+    { time: "10:51", product: "elevator" },
     { time: "11:00", product: "chair" },
     { time: "11:01", product: "table coating" },
     { time: "11:10", product: "display" },
@@ -90,6 +90,10 @@ const PRODUCTS_SCHEDULE = [
     { time: "18:10", product: "food container" },
     { time: "18:12", product: "plastic bottle" },
     { time: "18:13", product: "plastic bag" },
+    { time: "18:20", product: "smartphone" },
+    { time: "18:25", product: "credit card" },
+    { time: "18:27", product: "laptop" },
+    { time: "18:30", product: "student card" },
     { time: "19:03", product: "chopsticks wrapper" },
     { time: "19:30", product: "car key" },
     { time: "19:31", product: "car seat" },
@@ -112,16 +116,28 @@ const PRODUCTS_SCHEDULE = [
     { time: "00:01", product: "pillow" },
     { time: "00:02", product: "quilt" },
     { time: "00:03", product: "phone charger" },
-    { time: "00:04", product: "pillow" }
+    { time: "00:04", product: "credit card" }
 ];
 
 // Product data lookup with more details
 const PRODUCT_DETAILS = {
+    "Adhesive": {
+        price: 2.99,
+        petroleum: "Synthetic polymers and resins derived from petroleum",
+        alternative: "Natural adhesives like starch or casein-based glues",
+        usage: "General"
+    },
     "Toothbrush": {
         price: 8.99,
         petroleum: "Nylon bristles, plastic handle derived from crude oil polymerization",
         alternative: "Bamboo handle with natural boar bristles",
         usage: "Personal Care"
+    },
+    "Credit Card": {
+        price: 0.01,
+        petroleum: "PVC plastic card body, synthetic inks",
+        alternative: "Metal card or digital wallet",
+        usage: "Financial"
     },
     "Toothpaste": {
         price: 5.49,
