@@ -182,7 +182,7 @@ const PRODUCT_DETAILS = {
         usage: "Appliance"
     },
     "Plastic Bottle": {
-        price: 12.99,
+        price: 2.59,
         petroleum: "100% petroleum-derived polyethylene terephthalate (PET)",
         alternative: "Glass or stainless steel bottle",
         usage: "Packaging"
