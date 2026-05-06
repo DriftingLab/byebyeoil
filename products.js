@@ -87,9 +87,9 @@ const PRODUCTS_SCHEDULE = [
     { time: "17:01", product: "chair" },
     { time: "17:02", product: "foam cushion" },
     { time: "17:30", product: "student card" },
-    { time: "19:00", product: "food container" },
-    { time: "19:01", product: "plastic lid" },
-    { time: "19:02", product: "plastic bag" },
+    { time: "18:10", product: "food container" },
+    { time: "18:12", product: "plastic bottle" },
+    { time: "18:13", product: "plastic bag" },
     { time: "19:03", product: "chopsticks wrapper" },
     { time: "19:30", product: "car key" },
     { time: "19:31", product: "car seat" },
@@ -107,12 +107,12 @@ const PRODUCTS_SCHEDULE = [
     { time: "21:02", product: "screen" },
     { time: "21:03", product: "charging dock" },
     { time: "21:04", product: "game cartridge" },
-    { time: "22:55", product: "toothbrush" },
+    { time: "22:55", product: "food container" },
     { time: "00:00", product: "mattress" },
     { time: "00:01", product: "pillow" },
     { time: "00:02", product: "quilt" },
     { time: "00:03", product: "phone charger" },
-    { time: "00:04", product: "phone charger" }
+    { time: "00:04", product: "pillow" }
 ];
 
 // Product data lookup with more details
@@ -171,9 +171,15 @@ const PRODUCT_DETAILS = {
         alternative: "Glass or stainless steel bottle",
         usage: "Packaging"
     },
+     "Plastic Bag": {
+        price: 0.10,
+        petroleum: "High-density polyethylene (HDPE) or low-density polyethylene (LDPE) from crude oil",
+        alternative: "Reusable cloth bag or paper bag",
+        usage: "Packaging"
+    },
     "Food Container": {
-        price: 8.99,
-        petroleum: "BPA-free plastic (still petroleum-based polypropylene)",
+        price: 0.99,
+        petroleum: "BPA-free plastic (polypropylene, PP5)",
         alternative: "Glass Pyrex containers",
         usage: "Packaging"
     },
@@ -194,6 +200,12 @@ const PRODUCT_DETAILS = {
         petroleum: "Plastic bottle, capsules from petroleum derivatives",
         alternative: "Natural remedies or glass bottle",
         usage: "Pharma"
+    },
+    "Pillow": {
+        price: 10.99,
+        petroleum: "Polyester fiberfill, synthetic fabrics",
+        alternative: "Natural latex or organic cotton filling and cover",
+        usage: "Home Textiles"
     },
     "Hearing Aid": {
         price: 3000,

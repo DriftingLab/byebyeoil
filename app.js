@@ -278,25 +278,18 @@ function updateProduct(hours, minutes) {
         const materialCell = document.querySelector('.info-table .material-cell');
         const replacementCell = document.querySelector('.info-table .replacement-cell');
 
-        if (nameCell) {
-            const name = document.createElement('div');
-            name.textContent = lastProductEntry.product;
-            name.style.fontWeight = '600';
-            const usage = document.createElement('div');
-            usage.textContent = lastProductEntry.usage || lastProductEntry.petroleum || '';
-            usage.style.fontSize = '13px';
-            usage.style.color = '#666';
-            usage.style.marginTop = '6px';
-            // clear and append
-            nameCell.innerHTML = '';
-            nameCell.appendChild(name);
+        // populate labeled value spans we added in the HTML
+        const nameValue = document.querySelector('.info-table .name-value');
+        const priceValue = document.querySelector('.info-table .price-value');
+        const usageValue = document.querySelector('.info-table .usage-value');
+        const materialValue = document.querySelector('.info-table .material-value');
+        const replacementValue = document.querySelector('.info-table .replacement-value');
 
-        }
-        if (priceCell) priceCell.textContent = (lastProductEntry.price != null) ? `$${(lastProductEntry.price).toFixed(2)}` : '';
-        if (usageCell) usageCell.textContent = lastProductEntry.usage || lastProductEntry.petroleum || '';
-
-        if (materialCell) materialCell.textContent = lastProductEntry.petroleum_raw || '';
-        if (replacementCell) replacementCell.textContent = lastProductEntry.alternative || '';
+        if (nameValue) nameValue.textContent = lastProductEntry.product || '';
+        if (priceValue) priceValue.textContent = (lastProductEntry.price != null) ? `$${(lastProductEntry.price).toFixed(2)}` : '';
+        if (usageValue) usageValue.textContent = lastProductEntry.usage || lastProductEntry.petroleum || '';
+        if (materialValue) materialValue.textContent = lastProductEntry.petroleum_raw || '';
+        if (replacementValue) replacementValue.textContent = lastProductEntry.alternative || '';
     }
 }
 
